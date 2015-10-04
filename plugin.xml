@@ -16,6 +16,15 @@
     <engine name="cordova" version=">=2.9" />
   </engines>
 
+  <preference name="ShareSDK_AppKey"                    />
+  <preference name="ShareSDK_SinaWeibo_AppKey"          />
+  <preference name="ShareSDK_SinaWeibo_AppSecret"       />
+  <preference name="ShareSDK_SinaWeibo_RedirectUrl"     />
+  <preference name="ShareSDK_Wechat_AppId"              />
+  <preference name="ShareSDK_Wechat_AppSecret"          />
+  <preference name="ShareSDK_WechatMoments_AppId"       />
+  <preference name="ShareSDK_WechatMoments_AppSecret"   />   
+
   <js-module name="ShareSdk" src="www/ShareSdk.js">
     <clobbers target="cordova.plugins.ShareSdk" />
   </js-module>
@@ -61,33 +70,23 @@
         		<category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-        <!-- QQ客户端回调 -->
-        <activity 
-        	android:name="cn.sharesdk.tencent.qq.ResultReceiver"
-            android:launchMode="singleTask"
-            android:noHistory="true">
-            <!--
-            	如果集成QQ分享，或者使用QQ客户端来进行QQ空间的分享，须要在此处添加一个对ACTION_VIEW
-            	事件的过滤器，其中的scheme是“tencent”前缀再开发者应用的加上appId。如果此过滤器不设置，
-            	则分享结束以后不能得到正确的回调
-            -->
-            <intent-filter android:priority="1000" >
-                <data android:scheme="tencent100371282" />
-                <action android:name="android.intent.action.VIEW" />
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.BROWSABLE" />
-            </intent-filter>
-        </activity>
         <activity
             android:name=".wxapi.WXEntryActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:exported="true"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+        <meta-data android:name="ShareSDK_AppKey"                    android:value="$ShareSDK_AppKey" />
+        <meta-data android:name="ShareSDK_SinaWeibo_AppKey"          android:value="$ShareSDK_SinaWeibo_AppKey" />
+        <meta-data android:name="ShareSDK_SinaWeibo_AppSecret"       android:value="$ShareSDK_SinaWeibo_AppSecret" />
+        <meta-data android:name="ShareSDK_SinaWeibo_RedirectUrl"     android:value="$ShareSDK_SinaWeibo_RedirectUrl" />
+        <meta-data android:name="ShareSDK_Wechat_AppId"              android:value="$ShareSDK_Wechat_AppId" />
+        <meta-data android:name="ShareSDK_Wechat_AppSecret"          android:value="$ShareSDK_Wechat_AppSecret" />
+        <meta-data android:name="ShareSDK_WechatMoments_AppId"       android:value="$ShareSDK_WechatMoments_AppId" />
+        <meta-data android:name="ShareSDK_WechatMoments_AppSecret"   android:value="$ShareSDK_WechatMoments_AppSecret" />            
     </config-file>
 
     <!--
-    <source-file src="src/android/libs/weibosdkcore.jar"                   target-dir="libs"/>
     <source-file src="src/android/libs/MobTools.jar"                       target-dir="libs"/>
     <source-file src="src/android/libs/MobLogCollector.jar"                target-dir="libs"/>
     <source-file src="src/android/libs/ShareSDK-Core-2.6.3.jar"            target-dir="libs"/>
