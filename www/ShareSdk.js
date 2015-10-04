@@ -3,8 +3,8 @@ exec = require('cordova/exec');
 
 var exports = {};
 
-exports.share = function (success, error) {
-  exec(success, error, "ShareSdk", "share", []);
+exports.share = function (title,text,imgUrl,url,success, error) {
+  exec(success, error, "ShareSdk", "share", [title,text,imgUrl,url]);
 };
 
 module.exports = exports;
