@@ -64,10 +64,10 @@
             	“db-”前缀再开发者应用的加上appKey。如果此过滤器不设置，则不能完成SSO功能授权
             -->
             <intent-filter>
-                <data android:scheme="db-7janx53ilz11gbs" />
-        		<action android:name="android.intent.action.VIEW" />
-        		<category android:name="android.intent.category.BROWSABLE"/>
-        		<category android:name="android.intent.category.DEFAULT" />
+                <data android:scheme="tencent100371282" />
+                <action android:name="android.intent.action.VIEW" />
+        	<category android:name="android.intent.category.BROWSABLE"/>
+        	<category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
         <activity
