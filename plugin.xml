@@ -32,7 +32,8 @@
   <platform name="android">
     <config-file parent="/*" target="res/xml/config.xml">
       <feature name="ShareSdk">
-        <param name="android-package" value="com.yuanbaopu.databox.ShareSdkPlugin" />
+        <param name="android-package" value="com.yuanbaopu.databox.ShareSdkPlugin" />        
+        <param name="onload" value="true" />
       </feature>
     </config-file>
 
@@ -86,6 +87,7 @@
         <meta-data android:name="ShareSDK_WechatMoments_AppSecret"   android:value="VPREFIX_$SHARESDK_WECHATMOMENTS_APPSECRET" />            
     </config-file>
 
+    <source-file src="src/android/ShareSdkPlugin.java"   target-dir="src/com/yuanbaopu/databox"     />
     <!--
     <source-file src="src/android/libs/MobTools.jar"                       target-dir="libs"/>
     <source-file src="src/android/libs/MobLogCollector.jar"                target-dir="libs"/>
