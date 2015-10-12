@@ -76,14 +76,14 @@
             android:exported="true"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Translucent.NoTitleBar" />
-        <meta-data android:name="ShareSDK_AppKey"                    android:value="$SHARESDK_APPKEY" />
-        <meta-data android:name="ShareSDK_SinaWeibo_AppKey"          android:value="$SHARESDK_SINAWEIBO_APPKEY" />
-        <meta-data android:name="ShareSDK_SinaWeibo_AppSecret"       android:value="$SHARESDK_SINAWEIBO_APPSECRET" />
-        <meta-data android:name="ShareSDK_SinaWeibo_RedirectUrl"     android:value="$SHARESDK_SINAWEIBO_REDIRECTURL" />
-        <meta-data android:name="ShareSDK_Wechat_AppId"              android:value="$SHARESDK_WECHAT_APPID" />
-        <meta-data android:name="ShareSDK_Wechat_AppSecret"          android:value="$SHARESDK_WECHAT_APPSECRET" />
-        <meta-data android:name="ShareSDK_WechatMoments_AppId"       android:value="$SHARESDK_WECHATMOMENTS_APPID" />
-        <meta-data android:name="ShareSDK_WechatMoments_AppSecret"   android:value="$SHARESDK_WECHATMOMENTS_APPSECRET" />            
+        <meta-data android:name="ShareSDK_AppKey"                    android:value="VPREFIX_$SHARESDK_APPKEY" />
+        <meta-data android:name="ShareSDK_SinaWeibo_AppKey"          android:value="VPREFIX_$SHARESDK_SINAWEIBO_APPKEY" />
+        <meta-data android:name="ShareSDK_SinaWeibo_AppSecret"       android:value="VPREFIX_$SHARESDK_SINAWEIBO_APPSECRET" />
+        <meta-data android:name="ShareSDK_SinaWeibo_RedirectUrl"     android:value="VPREFIX_$SHARESDK_SINAWEIBO_REDIRECTURL" />
+        <meta-data android:name="ShareSDK_Wechat_AppId"              android:value="VPREFIX_$SHARESDK_WECHAT_APPID" />
+        <meta-data android:name="ShareSDK_Wechat_AppSecret"          android:value="VPREFIX_$SHARESDK_WECHAT_APPSECRET" />
+        <meta-data android:name="ShareSDK_WechatMoments_AppId"       android:value="VPREFIX_$SHARESDK_WECHATMOMENTS_APPID" />
+        <meta-data android:name="ShareSDK_WechatMoments_AppSecret"   android:value="VPREFIX_$SHARESDK_WECHATMOMENTS_APPSECRET" />            
     </config-file>
 
     <!--
@@ -97,26 +97,96 @@
     <source-file src="src/android/libs/ShareSDK-Wechat-Moments-2.6.3.jar"  target-dir="libs"/>
     -->
   </platform>
-  <!--platform name="ios">
+  
+  <platform name="ios">
     <config-file parent="/*" target="config.xml">
-      <feature name="CordovaUpdate">
-        <param name="ios-package" value="CordovaUpdate" />
+      <feature name="ShareSdk">
+        <param name="ios-package" value="CDVShareSDK" />
+        <param name="onload" value="true" />
       </feature>
+        <preference name="SHARESDK_APPKEY"                    value="$SHARESDK_APPKEY" />
+        <preference name="SHARESDK_SINAWEIBO_APPKEY"          value="$SHARESDK_SINAWEIBO_APPKEY" />
+        <preference name="SHARESDK_SINAWEIBO_APPSECRET"       value="$SHARESDK_SINAWEIBO_APPSECRET" />
+        <preference name="SHARESDK_SINAWEIBO_REDIRECTURL"     value="$SHARESDK_SINAWEIBO_REDIRECTURL" />
+        <preference name="SHARESDK_WECHAT_APPID"              value="$SHARESDK_WECHAT_APPID" />
+        <preference name="SHARESDK_WECHAT_APPSECRET"          value="$SHARESDK_WECHAT_APPSECRET" />
+        <preference name="SHARESDK_WECHATMOMENTS_APPID"       value="$SHARESDK_WECHATMOMENTS_APPID" />
+        <preference name="SHARESDK_WECHATMOMENTS_APPSECRET"   value="$SHARESDK_WECHATMOMENTS_APPSECRET" />            
     </config-file>
+    
+        <config-file target="*-Info.plist" parent="CFBundleURLTypes">
+            <array>
+                <dict>
+                    <key>CFBundleTypeRole</key>
+                    <string>Editor</string>
+                    <key>CFBundleURLName</key>
+                    <string>wechat</string>
+                    <key>CFBundleURLSchemes</key>
+                    <array>
+                        <string>$SHARESDK_WECHAT_APPID</string>
+                    </array>
 
-    <config-file target="*-Info.plist" parent="NSAppTransportSecurity">
-      <dict>
-        <key>NSAllowsArbitraryLoads</key>
-        <true/>
-      </dict>
-    </config-file>
+                    <key>LSApplicationQueriesSchemes</key>
+                    <array>
+                        <string>weixin</string>
+                        <string>wechat</string>
+                    </array>
 
-    <source-file src="src/ios/CordovaUpdate.m" />
-    <header-file src="src/ios/METEORCordovaURLProtocol.h" />
-    <source-file src="src/ios/METEORCordovaURLProtocol.m" />
+                    <key>NSAppTransportSecurity</key>
+                    <dict>
+                        <key>NSAllowsArbitraryLoads</key>
+                        <true/>
+                    </dict>
+                </dict>
+            </array>
+        </config-file>
 
-    <framework src="Foundation.framework" />
+        <!-- Plugin source code -->
+        <header-file src="src/ios/CDVShareSDK.h" />
+        <source-file src="src/ios/CDVShareSDK.m" />
 
-  </platform-->
-
+         <!-- Wechat Official -->
+        <header-file src="src/ios/libs/ShareSDK/Extend/WeChatSDK/WXApi.h" />
+        <header-file src="src/ios/libs/ShareSDK/Extend/WeChatSDK/WXApiObject.h" />
+        <source-file src="src/ios/libs/ShareSDK/Extend/WeChatSDK/libWeChatSDK.a" framework="true" />
+        <resource-file src="src/ios/libs/ShareSDK/UI/ShareSDKFlatShareViewUI.bundle" />
+        <resource-file src="src/ios/libs/ShareSDK/Core/zh-Hans.lproj/ShareSDKLocalizable.strings" />
+        <resource-file src="src/ios/libs/ShareSDK/Core/Resource.bundle" />
+        <resource-file src="src/ios/libs/ShareSDK/Extend/QQConnectSDK/TencentOpenApi_IOS_Bundle.bundle" />
+        <!-- Sina Official -->
+        <header-file src="src/ios/libs/ShareSDK/Extend/SinaWeiboSDK/WeiboSDK.h" />
+        <source-file src="src/ios/libs/ShareSDK/Extend/SinaWeiboSDK/libWeiboSDK.a" framework="true" />
+        <resource-file src="src/ios/libs/ShareSDK/Extend/SinaWeiboSDK/WeiboSDK.bundle" />
+        <!-- ShareSDK -->
+        <framework src="src/ios/libs/ShareSDK/ShareSDK.framework" custom="true"/>
+        <framework src="src/ios/libs/ShareSDK/Connection/CopyConnection.framework" custom="true"/>
+        <framework src="src/ios/libs/ShareSDK/Connection/MailConnection.framework" custom="true"/>
+        <framework src="src/ios/libs/ShareSDK/Connection/QQConnection.framework" custom="true"/>
+        <framework src="src/ios/libs/ShareSDK/Connection/QZoneConnection.framework" custom="true"/>
+        <framework src="src/ios/libs/ShareSDK/Connection/SinaWeiboConnection.framework" custom="true"/>
+        <framework src="src/ios/libs/ShareSDK/Connection/SMSConnection.framework" custom="true"/>
+        <framework src="src/ios/libs/ShareSDK/Connection/TencentWeiboConnection.framework" custom="true"/>
+        <framework src="src/ios/libs/ShareSDK/Connection/WeChatConnection.framework" custom="true"/>
+        <framework src="src/ios/libs/ShareSDK/Core/ShareSDKCoreService.framework" custom="true"/>
+        <framework src="src/ios/libs/ShareSDK/Core/AGCommon.framework" custom="true"/>
+        <framework src="src/ios/libs/ShareSDK/Core/MOBFoundation.framework" custom="true"/>
+        <framework src="src/ios/libs/ShareSDK/UI/ShareSDKShareActionSheet.framework" custom="true"/>
+        <framework src="src/ios/libs/ShareSDK/UI/ShareSDKFlatShareViewUI.framework" custom="true"/>
+        <framework src="src/ios/libs/ShareSDK/Extend/QQConnectSDK/TencentOpenAPI.framework" custom="true"/>
+        
+        <!-- Other required frameworks -->
+        <framework src="libz.1.2.5.dylib" />
+        <framework src="MessageUI.framework" />
+        <framework src="SystemConfiguration.framework"/>
+        <framework src="Security.framework"  />
+        <framework src="libstdc++.dylib" />
+        <framework src="QuartzCore.framework"  />
+        <framework src="CoreTelephony.framework"  />
+        <framework src="libicucore.dylib" />
+        <framework src="JavaScriptCore.framework" />
+        <framework src="CoreText.framework"  />
+        <framework src="libsqlite3.dylib" />
+        <framework src="ImageIO.framework" />
+        
+    </platform>
 </plugin>
