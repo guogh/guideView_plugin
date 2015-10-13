@@ -148,7 +148,7 @@
         <source-file src="src/ios/CDVShareSDK.m" />
 
          <!-- Wechat Official -->
-         
+        <!-- 
         <header-file src="src/ios/libraries/extends/WeChatSDK/WXApi.h" />
         <header-file src="src/ios/libraries/extends/WeChatSDK/WXApiObject.h" />
         <source-file src="src/ios/libraries/extends/WeChatSDK/libWeChatSDK.a" framework="true" />
@@ -160,8 +160,7 @@
         <framework src="src/ios/libraries/ShareSDKExtension.framework" custom="true"/>
         <framework src="src/ios/libraries/ShareSDKUI.framework" custom="true"/>
         <framework src="src/ios/libraries/MOBFoundation.framework" custom="true"/>
-        
-        <!--
+        -->
         <header-file src="src/ios/libraries/extends/WeChatSDK/WXApi.h" />
         <header-file src="src/ios/libraries/extends/WeChatSDK/WXApiObject.h" />
         <source-file src="src/ios/libraries/extends/WeChatSDK/libWeChatSDK.a" framework="true" />
@@ -202,7 +201,5 @@
         <framework src="CoreText.framework"  />
         <framework src="libsqlite3.dylib" />
         <framework src="ImageIO.framework" />
-        -->
-        
     </platform>
 </plugin>
