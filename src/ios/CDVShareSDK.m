@@ -13,8 +13,8 @@
 #pragma mark "API"
 - (void)pluginInitialize {
     NSString* wechatAppId = [[self.commandDelegate settings] objectForKey:@"sharesdk_wechat_appid"];
-    NSString* wechatAppSecret = [[self.commandDelegate settings] objectForKey:@"sharesdk_wechata_ppsecret"];
-    NSString* sharesdkAppId = [[self.commandDelegate settings] objectForKey:@"sharesdk_app_key"];
+    NSString* wechatAppSecret = [[self.commandDelegate settings] objectForKey:@"sharesdk_wechat_appsecret"];
+    NSString* sharesdkAppId = [[self.commandDelegate settings] objectForKey:@"sharesdk_appkey"];
     if(wechatAppId && wechatAppSecret && sharesdkAppId){
        
         /*Share SDK config*/
