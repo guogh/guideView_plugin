@@ -100,7 +100,6 @@
     -->
   </platform>
   
-  <!--
   <platform name="ios">
     <config-file parent="/*" target="config.xml">
       <feature name="ShareSdk">
@@ -146,6 +145,7 @@
 
         <header-file src="src/ios/CDVShareSDK.h" />
         <source-file src="src/ios/CDVShareSDK.m" />
+        <!--
         <header-file src="src/ios/libraries/extends/WeChatSDK/WXApi.h" />
         <header-file src="src/ios/libraries/extends/WeChatSDK/WXApiObject.h" />
         <source-file src="src/ios/libraries/extends/WeChatSDK/libWeChatSDK.a" framework="true" />
@@ -156,14 +156,12 @@
         <framework     src="src/ios/libraries/ShareSDKExtension.framework" custom="true"/>
         <framework     src="src/ios/libraries/ShareSDKUI.framework" custom="true"/>
         <framework     src="src/ios/libraries/ShareSDKConnector.framework" custom="true"/>
-        
+        -->
         <framework src="libicucore.tbd" />
         <framework src="libz.tbd" />
         <framework src="libstdc++.tbd" />
         <framework src="JavaScriptCore.framework" />
         <framework src="ImageIO.framework" />
-        <framework src="libsqlite3.tbd" />
-         
-    </platform>
-    -->
+        <framework src="libsqlite3.tbd" /> 
+    </platform> 
 </plugin>
