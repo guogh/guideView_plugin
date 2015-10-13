@@ -15,24 +15,27 @@
     NSString* wechatAppId = [[self.commandDelegate settings] objectForKey:@"sharesdk_wechat_appid"];
     NSString* wechatAppSecret = [[self.commandDelegate settings] objectForKey:@"sharesdk_wechat_appsecret"];
     NSString* sharesdkAppId = [[self.commandDelegate settings] objectForKey:@"sharesdk_appkey"];
-    if(wechatAppId && wechatAppSecret && sharesdkAppId){
-       
-        /*Share SDK config*/
+
+    NSString* sinaweiboAppKey = [[self.commandDelegate settings] objectForKey:@"sharesdk_sinaweibo_appkey"];
+    NSString* sinaweiboAppSecret = [[self.commandDelegate settings] objectForKey:@"sharesdk_sinaweibo_appsecret"];
+    NSString* sinaweiboRedirectURL = [[self.commandDelegate settings] objectForKey:@"sharesdk_sinaweibo_redirecturl"];
+    
+    
+    if (sharesdkAppId){
         [ShareSDK registerApp:sharesdkAppId];
         
-        [ShareSDK connectWeChatWithAppId:wechatAppId
-                               appSecret:wechatAppSecret
-                               wechatCls:[WXApi class]];
+        if(wechatAppId && wechatAppSecret){
+            
+            [ShareSDK connectWeChatWithAppId:wechatAppId
+                                   appSecret:wechatAppSecret
+                                   wechatCls:[WXApi class]];
+        }
         
-        //连接短信分享
-        [ShareSDK connectSMS];
-        //连接邮件
-        [ShareSDK connectMail];
-        //连接打印
-        [ShareSDK connectAirPrint];
-        //连接拷贝
-        [ShareSDK connectCopy];
-        
+        if(sinaweiboAppKey && sinaweiboAppSecret && sinaweiboRedirectURL ){
+            [ShareSDK connectSinaWeiboWithAppKey:sinaweiboAppKey
+                                       appSecret:sinaweiboAppSecret
+                                     redirectUri:sinaweiboRedirectURL];
+        }
     }
 }
 - (void)share:(CDVInvokedUrlCommand *)command
