@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <?xml version="1.0" encoding="utf-8"?>
 <DevInfor>
 
@@ -45,3 +46,6 @@
 }
 
 </DevInfo>
+=======
+# guideView_plugin
+>>>>>>> 9a08d9d528217be236563acad4f90b269b7b4bcf
