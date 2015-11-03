@@ -1,199 +1,76 @@
 <?xml version='1.0' encoding='utf-8'?>
-<plugin id="sharesdk" 
+<plugin id="GuidePage"
   version="0.0.1" 
   xmlns="http://apache.org/cordova/ns/plugins/1.0" 
   xmlns:android="http://schemas.android.com/apk/res/android">
 
-  <name>ShareSdk</name>
-  <description>ShareSdk</description>
-  <author>fuyh@asto-inc.com</author>
+  <name>GuidePage</name>
+  <description>GuidePage</description>
+  <author>guogh@asto-inc.com</author>
   <license>MIT</license>
-  <keywords>sharesdk</keywords>
-  <repo>https://github.com/fuyinhai/sharesdk</repo>
-  <issue>https://github.com/fuyinhai/sharesdk/issues</issue>
+  <keywords>GuidePage</keywords>
+
+
+<preference name="GUIDEIMAGECOUNT" />
+<preference name="GUIDEINFOURL" />
+<preference name="IMAGE" />
 
   <engines>
     <engine name="cordova" version=">=2.9" />
   </engines>
 
-  <preference name="SHARESDK_APPKEY"                    />
-  <preference name="SHARESDK_SINAWEIBO_APPKEY"          />
-  <preference name="SHARESDK_SINAWEIBO_APPSECRET"       />
-  <preference name="SHARESDK_SINAWEIBO_REDIRECTURL"     />
-  <preference name="SHARESDK_WECHAT_APPID"              />
-  <preference name="SHARESDK_WECHAT_APPSECRET"          />
-  <preference name="SHARESDK_WECHATMOMENTS_APPID"       />
-  <preference name="SHARESDK_WECHATMOMENTS_APPSECRET"   />   
-
-  <js-module name="ShareSdk" src="www/ShareSdk.js">
-    <clobbers target="cordova.plugins.ShareSdk" />
+  <js-module name="GuidePage" src="www/GuidePage.js">
+    <clobbers target="cordova.plugins.GuidePage" />
   </js-module>
 
-  <platform name="android">
-    <config-file parent="/*" target="res/xml/config.xml">
-      <feature name="ShareSdk">
-        <param name="android-package" value="com.yuanbaopu.databox.ShareSdkPlugin" />        
-        <param name="onload" value="true" />
-      </feature>
-    </config-file>
 
-    <config-file target="AndroidManifest.xml" parent="/*">
-    	<uses-permission android:name="android.permission.GET_TASKS" />
-        <uses-permission android:name="android.permission.INTERNET" />
-        <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
-        <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-        <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
-        <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-        <uses-permission android:name="android.permission.READ_PHONE_STATE" />
-        <uses-permission android:name="android.permission.MANAGE_ACCOUNTS"/>
-        <uses-permission android:name="android.permission.GET_ACCOUNTS"/>
-    </config-file>
-    <config-file target="AndroidManifest.xml" parent="/manifest/application">
-        <activity
-            android:name="com.mob.tools.MobUIShell"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar"
-            android:configChanges="keyboardHidden|orientation|screenSize"
-            android:windowSoftInputMode="stateHidden|adjustResize" >
-            <!-- 
-            	Adapter表示一个继承自cn.sharesdk.framework.authorize.AuthorizeAdapter的类，
-            	这个类可以监听到页面的生命周期，也可以获取授权页面的各种UI控件。 
-            	开发者可以通过继承AuthorizeAdapter，重写其方法，并获取各种UI来自定义这个页面的行为。
-            <meta-data android:name="Adapter" android:value="cn.sharesdk.demo.MyAdapter" />            
-            -->
-            <!--
-            	Dropbox的SSO功能需要在此处添加一个对ACTION_VIEW事件的过滤器，其中的scheme是
-            	“db-”前缀再开发者应用的加上appKey。如果此过滤器不设置，则不能完成SSO功能授权
-            -->
-            <intent-filter>
-                <data android:scheme="tencent100371282" />
-                <action android:name="android.intent.action.VIEW" />
-        	<category android:name="android.intent.category.BROWSABLE"/>
-        	<category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-        </activity>
-        <activity
-            android:name=".wxapi.WXEntryActivity"
-            android:configChanges="keyboardHidden|orientation|screenSize"
-            android:exported="true"
-            android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
-        <meta-data android:name="ShareSDK_AppKey"                    android:value="VPREFIX_$SHARESDK_APPKEY" />
-        <meta-data android:name="ShareSDK_SinaWeibo_AppKey"          android:value="VPREFIX_$SHARESDK_SINAWEIBO_APPKEY" />
-        <meta-data android:name="ShareSDK_SinaWeibo_AppSecret"       android:value="VPREFIX_$SHARESDK_SINAWEIBO_APPSECRET" />
-        <meta-data android:name="ShareSDK_SinaWeibo_RedirectUrl"     android:value="VPREFIX_$SHARESDK_SINAWEIBO_REDIRECTURL" />
-        <meta-data android:name="ShareSDK_Wechat_AppId"              android:value="VPREFIX_$SHARESDK_WECHAT_APPID" />
-        <meta-data android:name="ShareSDK_Wechat_AppSecret"          android:value="VPREFIX_$SHARESDK_WECHAT_APPSECRET" />
-        <meta-data android:name="ShareSDK_WechatMoments_AppId"       android:value="VPREFIX_$SHARESDK_WECHATMOMENTS_APPID" />
-        <meta-data android:name="ShareSDK_WechatMoments_AppSecret"   android:value="VPREFIX_$SHARESDK_WECHATMOMENTS_APPSECRET" />            
-    </config-file>
-
-    <source-file src="src/android/ShareSdkPlugin.java"   target-dir="src/com/yuanbaopu/databox"     />
-    <source-file src="src/android/libs/MobTools.jar"                       target-dir="libs"/>
-    <source-file src="src/android/libs/MobLogCollector.jar"                target-dir="libs"/>
-    <source-file src="src/android/libs/ShareSDK-Core-2.6.3.jar"            target-dir="libs"/>
-    <source-file src="src/android/libs/ShareSDK-SinaWeibo-2.6.3.jar"       target-dir="libs"/>
-    <source-file src="src/android/libs/ShareSDK-Wechat-2.6.3.jar"          target-dir="libs"/>
-    <source-file src="src/android/libs/ShareSDK-Wechat-Core-2.6.3.jar"     target-dir="libs"/>
-    <source-file src="src/android/libs/ShareSDK-Wechat-Favorite-2.6.3.jar" target-dir="libs"/>
-    <source-file src="src/android/libs/ShareSDK-Wechat-Moments-2.6.3.jar"  target-dir="libs"/>
-    
-    <source-file src="src/android/libs/arm64-v8a/libweibosdkcore.so"    target-dir="libs/arm64-v8a"/>
-    <source-file src="src/android/libs/armeabi/libweibosdkcore.so"      target-dir="libs/armeabi"/>
-    <source-file src="src/android/libs/armeabi-v7a/libweibosdkcore.so"  target-dir="libs/armeabi-v7a"/>
-    <source-file src="src/android/libs/x86/libweibosdkcore.so"          target-dir="libs/x86"/>
-    <source-file src="src/android/libs/x86_64/libweibosdkcore.so"       target-dir="libs/x86_64"/>
-    
-  </platform>
-  
   <platform name="ios">
     <config-file parent="/*" target="config.xml">
-      <feature name="ShareSdk">
-        <param name="ios-package" value="CDVShareSDK" />
+      <feature name="GuidePage">
+        <param name="ios-package" value="CDVGuidePage" />
         <param name="onload" value="true" />
       </feature>
-        <preference name="SHARESDK_APPKEY"                    value="$SHARESDK_APPKEY" />
-        <preference name="SHARESDK_SINAWEIBO_APPKEY"          value="$SHARESDK_SINAWEIBO_APPKEY" />
-        <preference name="SHARESDK_SINAWEIBO_APPSECRET"       value="$SHARESDK_SINAWEIBO_APPSECRET" />
-        <preference name="SHARESDK_SINAWEIBO_REDIRECTURL"     value="$SHARESDK_SINAWEIBO_REDIRECTURL" />
-        <preference name="SHARESDK_WECHAT_APPID"              value="$SHARESDK_WECHAT_APPID" />
-        <preference name="SHARESDK_WECHAT_APPSECRET"          value="$SHARESDK_WECHAT_APPSECRET" />
-        <preference name="SHARESDK_WECHATMOMENTS_APPID"       value="$SHARESDK_WECHATMOMENTS_APPID" />
-        <preference name="SHARESDK_WECHATMOMENTS_APPSECRET"   value="$SHARESDK_WECHATMOMENTS_APPSECRET" />            
+      
+      <!--  引导页 的个数    -->
+      <preference name="guideImageCount"       value="$GUIDEIMAGECOUNT" />
+      <!--   动态获取的 josn   -->
+      <preference name="guideInfoUrl"       value="$GUIDEINFOURL" />
+      
     </config-file>
     
-        <config-file target="*-Info.plist" parent="CFBundleURLTypes">
-            <array>
-                <dict>
-                    <key>CFBundleTypeRole</key>
-                    <string>Editor</string>
-                    <key>CFBundleURLName</key>
-                    <string>wechat</string>
-                    <key>CFBundleURLSchemes</key>
-                    <array>
-                        <string>$SHARESDK_WECHAT_APPID</string>
-                    </array>
-
-                    <key>LSApplicationQueriesSchemes</key>
-                    <array>
-                        <string>weixin</string>
-                        <string>wechat</string>
-                    </array>
-
-                    <key>NSAppTransportSecurity</key>
-                    <dict>
-                        <key>NSAllowsArbitraryLoads</key>
-                        <true/>
-                    </dict>
-                </dict>
-            </array>
-        </config-file>
-
         <!-- Plugin source code -->
-        <header-file src="src/ios/CDVShareSDK.h" />
-        <source-file src="src/ios/CDVShareSDK.m" />
+        <header-file src="src/ios/CDVGuidePage.h" />
+        <source-file src="src/ios/CDVGuidePage.m" />
+        
+        
+        <!--   默认引导页图片      -->
+        <resource-file src="src/ios/GuideImage/a-guide-480h.png" />
+        <resource-file src="src/ios/GuideImage/b-guide-480h.png" />
+        <resource-file src="src/ios/GuideImage/c-guide-480h.png" />
+        
+        <resource-file src="src/ios/GuideImage/a-guide-568h.png" />
+        <resource-file src="src/ios/GuideImage/b-guide-568h.png" />
+        <resource-file src="src/ios/GuideImage/c-guide-568h.png" />
+        
+        <resource-file src="src/ios/GuideImage/a-guide-667h.png" />
+        <resource-file src="src/ios/GuideImage/b-guide-667h.png" />
+        <resource-file src="src/ios/GuideImage/c-guide-667h.png" />
+        
+        <resource-file src="src/ios/GuideImage/a-guide-736h.png" />
+        <resource-file src="src/ios/GuideImage/b-guide-736h.png" />
+        <resource-file src="src/ios/GuideImage/c-guide-736h.png" />
 
-         <!-- Wechat Official -->
-        <header-file src="src/ios/libs/ShareSDK/Extend/WeChatSDK/WXApi.h" />
-        <header-file src="src/ios/libs/ShareSDK/Extend/WeChatSDK/WXApiObject.h" />
-        <source-file src="src/ios/libs/ShareSDK/Extend/WeChatSDK/libWeChatSDK.a" framework="true" />
-        <resource-file src="src/ios/libs/ShareSDK/UI/ShareSDKFlatShareViewUI.bundle" />
-        <resource-file src="src/ios/libs/ShareSDK/Core/zh-Hans.lproj/ShareSDKLocalizable.strings" />
-        <resource-file src="src/ios/libs/ShareSDK/Core/Resource.bundle" />
-        <resource-file src="src/ios/libs/ShareSDK/Extend/QQConnectSDK/TencentOpenApi_IOS_Bundle.bundle" />
-        <!-- Sina Official -->
-        <header-file src="src/ios/libs/ShareSDK/Extend/SinaWeiboSDK/WeiboSDK.h" />
-        <source-file src="src/ios/libs/ShareSDK/Extend/SinaWeiboSDK/libWeiboSDK.a" framework="true" />
-        <resource-file src="src/ios/libs/ShareSDK/Extend/SinaWeiboSDK/WeiboSDK.bundle" />
-        <!-- ShareSDK -->
-        <framework src="src/ios/libs/ShareSDK/ShareSDK.framework" custom="true"/>
-        <framework src="src/ios/libs/ShareSDK/Connection/CopyConnection.framework" custom="true"/>
-        <framework src="src/ios/libs/ShareSDK/Connection/MailConnection.framework" custom="true"/>
-        <framework src="src/ios/libs/ShareSDK/Connection/QQConnection.framework" custom="true"/>
-        <framework src="src/ios/libs/ShareSDK/Connection/QZoneConnection.framework" custom="true"/>
-        <framework src="src/ios/libs/ShareSDK/Connection/SinaWeiboConnection.framework" custom="true"/>
-        <framework src="src/ios/libs/ShareSDK/Connection/SMSConnection.framework" custom="true"/>
-        <framework src="src/ios/libs/ShareSDK/Connection/TencentWeiboConnection.framework" custom="true"/>
-        <framework src="src/ios/libs/ShareSDK/Connection/WeChatConnection.framework" custom="true"/>
-        <framework src="src/ios/libs/ShareSDK/Core/ShareSDKCoreService.framework" custom="true"/>
-        <framework src="src/ios/libs/ShareSDK/Core/AGCommon.framework" custom="true"/>
-        <framework src="src/ios/libs/ShareSDK/Core/MOBFoundation.framework" custom="true"/>
-        <framework src="src/ios/libs/ShareSDK/UI/ShareSDKShareActionSheet.framework" custom="true"/>
-        <framework src="src/ios/libs/ShareSDK/UI/ShareSDKFlatShareViewUI.framework" custom="true"/>
-        <framework src="src/ios/libs/ShareSDK/Extend/QQConnectSDK/TencentOpenAPI.framework" custom="true"/>
-        
-        <!-- Other required frameworks -->
-        <framework src="libz.1.2.5.dylib" />
-        <framework src="MessageUI.framework" />
-        <framework src="SystemConfiguration.framework"/>
-        <framework src="Security.framework"  />
-        <framework src="libstdc++.dylib" />
-        <framework src="QuartzCore.framework"  />
-        <framework src="CoreTelephony.framework"  />
-        <framework src="libicucore.dylib" />
-        <framework src="JavaScriptCore.framework" />
-        <framework src="CoreText.framework"  />
-        <framework src="libsqlite3.dylib" />
-        <framework src="ImageIO.framework" />
-        
-    </platform>
+  </platform>
 </plugin>
+
+
+
+
+
+
+
+
+
+
+
+
